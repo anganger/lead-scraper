@@ -94,3 +94,7 @@ The login session is stored in `~/.lead-scraper` (change with `SCRAPER_HOME`). N
 | LinkedIn needs you to sign in again | `npm run linkedin:login` |
 
 You are responsible for using it within each site's terms and the privacy laws that apply to the people you look up.
+
+## License
+
+MIT, see `LICENSE`.
