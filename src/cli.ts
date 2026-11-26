@@ -1,9 +1,9 @@
 // npm run site -- <url>                              website -> output/<host>.json and .txt
-// npm run linkedin -- --company <url> --person <url>  LinkedIn through Bright Data / Apify (add --browser to use your own login)
+// npm run linkedin -- --company <url> --person <url>  LinkedIn through Bright Data / Apify
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { renderSite } from './render-fetch';
 import { scrapeSite, toPlainText } from './scraper';
-import { linkedInTargets, scrapeLinkedIn, type LinkedInResult } from './linkedin';
+import type { LinkedInResult } from './linkedin';
 import { linkedInApiReady, scrapeLinkedInApi } from './linkedin-api';
 
 const [mode, ...args] = process.argv.slice(2);
@@ -26,12 +26,8 @@ async function linkedin() {
   const out: LinkedInResult[] = [];
   const keep = async (r: LinkedInResult) => { const { logo, ...rest } = r; out.push(rest); };
   const say = (s: string) => console.log(s);
-  let notes: string[];
-  if (args.includes('--browser')) notes = await scrapeLinkedIn(linkedInTargets(company, person), say, keep);
-  else {
-    if (!linkedInApiReady()) throw new Error('set BRIGHTDATA_TOKEN or APIFY_TOKEN in .env (see README), or pass --browser');
-    notes = await scrapeLinkedInApi(company, person, say, keep);
-  }
+  if (!linkedInApiReady()) throw new Error('set BRIGHTDATA_TOKEN or APIFY_TOKEN in .env (see README)');
+  const notes = await scrapeLinkedInApi(company, person, say, keep);
   for (const n of notes) console.log(n);
   if (!out.length) throw new Error('nothing was read');
   save(`linkedin-${slug(company ?? person!)}.json`, JSON.stringify(out, null, 2));

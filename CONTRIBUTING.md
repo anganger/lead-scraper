@@ -20,7 +20,7 @@ npm install
 npm test
 ```
 
-Needs Node.js 22+ (`nvm use` reads `.nvmrc`). Google Chrome is only needed to run the `--render` and `--browser` modes, not for the tests.
+Needs Node.js 22+ (`nvm use` reads `.nvmrc`). Google Chrome is only needed for the `--render` mode, not for the tests.
 
 ## Before you open a pull request
 
@@ -32,7 +32,7 @@ npm test        # Vitest
 - Keep the code style of the file you are editing (2 spaces, single quotes, small functions).
 - New logic needs a test in `test/`. Tests must not hit the network: pass a fake `fetch` the way `test/scraper.test.ts` does.
 - Never commit `.env`, API keys, cookies, or real people's scraped data. Use `example.com` / `acme.com` style test data.
-- Do not weaken the private-network block in `isPublicHost` or the LinkedIn rate limit.
+- Do not weaken the private-network block in `isPublicHost`.
 
 ## Commit messages
 

@@ -27,6 +27,6 @@ body:
     id: part
     attributes:
       label: Which part?
-      options: [Website scraper, LinkedIn (API mode), LinkedIn (browser mode), Setup / install]
+      options: [Website scraper, LinkedIn, Setup / install]
     validations:
       required: true

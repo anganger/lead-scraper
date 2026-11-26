@@ -27,7 +27,6 @@
   "scripts": {
     "site": "tsx --env-file-if-exists=.env src/cli.ts site",
     "linkedin": "tsx --env-file-if-exists=.env src/cli.ts linkedin",
-    "linkedin:login": "tsx --env-file-if-exists=.env src/login.ts",
     "test": "vitest run",
     "check": "tsc --noEmit"
   },

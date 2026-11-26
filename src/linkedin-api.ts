@@ -1,5 +1,5 @@
 // LinkedIn without a login: Bright Data's Scraper API first (5,000 free records a month, 2 per lead), Apify (HarvestAPI) as backup.
-// Same result shape as the Chrome scraper in linkedin.ts, so callers save it the same way. Tokens: BRIGHTDATA_TOKEN, APIFY_TOKEN.
+// Tokens: BRIGHTDATA_TOKEN, APIFY_TOKEN.
 // LinkedIn hides job titles and work history from logged-out readers since Nov 2025, so profiles carry name, company, about and activity.
 import { normalizeLinkedInUrl, type LinkedInLogo, type LinkedInResult } from './linkedin';
 

@@ -6,10 +6,8 @@ node_modules/
 .env.*
 !.env.example
 
-# scraper output and local browser data
+# scraper output
 output/
-.lead-scraper/
-chrome-profile/
 
 # build, test and tool caches
 dist/

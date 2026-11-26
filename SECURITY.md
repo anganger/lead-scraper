@@ -15,4 +15,3 @@ Only the latest commit on `main` gets fixes.
 
 - The website scraper refuses private, local and cloud-metadata addresses (SSRF protection in `isPublicHost`).
 - API keys are read only from your local `.env`, which is git-ignored.
-- Browser mode stores your LinkedIn session in a local folder (`~/.lead-scraper`). Treat it like a password.

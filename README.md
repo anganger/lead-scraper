@@ -34,14 +34,13 @@ Built for sales research, lead qualification, recruiting, and market research.
 - Falls back to headless Chrome when a site only renders with JavaScript.
 - Blocks private and local network addresses (SSRF protection), so it is safe to run on URLs from other people.
 - LinkedIn through **Bright Data** first and **Apify** as backup; you only need one key.
-- Optional browser mode that uses your own LinkedIn login, with a built-in rate limit.
 - Saves JSON for programs and plain text for people and LLMs.
 - No database, no server: one folder, two commands.
 - Tested on Linux, macOS and Windows.
 
 ## Quick start
 
-You need **[Node.js 22+](https://nodejs.org)** and **[Google Chrome](https://www.google.com/chrome/)** (Chrome is only used for JavaScript-heavy sites and LinkedIn browser mode; nothing extra is downloaded).
+You need **[Node.js 22+](https://nodejs.org)** and **[Google Chrome](https://www.google.com/chrome/)** (Chrome is only used for JavaScript-heavy sites; nothing extra is downloaded).
 
 ```bash
 git clone https://github.com/anganger/lead-scraper.git
@@ -72,7 +71,7 @@ Saves `output/company-com.json` and `output/company-com.txt`.
 
 ## LinkedIn scraper
 
-### Option A (recommended): an API service, no LinkedIn account
+LinkedIn is read through an API service, so **no LinkedIn account or login is needed**.
 
 1. Get your **own** key from one or both services:
    - **Bright Data:** [brightdata.com](https://brightdata.com) → Web Scraper API → account settings → API token
@@ -95,29 +94,14 @@ Bright Data is tried first and Apify is the backup. Both have free tiers, but ca
 
 > LinkedIn hides job titles and work history from logged-out readers, so profiles mostly give the name, current company, about text and recent activity.
 
-### Option B: your own LinkedIn login
-
-```bash
-npm run linkedin:login
-```
-
-Sign in yourself in the Chrome window that opens (the script never sees your password). Then:
-
-```bash
-npm run linkedin -- --company https://www.linkedin.com/company/openai --browser
-```
-
-> **Warning:** automated reading is against LinkedIn's User Agreement and **can get the account restricted**. Browser mode is capped at 30 page loads an hour. Prefer option A, and never use an account you cannot afford to lose.
-
 ## Configuration
 
 All settings live in `.env` (copied from [`.env.example`](.env.example)). `.env` is git-ignored, so your keys stay on your machine.
 
 | Variable | Needed for | Description |
 |---|---|---|
-| `BRIGHTDATA_TOKEN` | LinkedIn option A | Bright Data API token |
-| `APIFY_TOKEN` | LinkedIn option A | Apify API token (backup, or use alone) |
-| `SCRAPER_HOME` | optional | Where browser mode keeps its login session. Default `~/.lead-scraper` |
+| `BRIGHTDATA_TOKEN` | LinkedIn | Bright Data API token |
+| `APIFY_TOKEN` | LinkedIn | Apify API token (backup, or use alone) |
 | `SCRAPER_USER_AGENT` | optional | Custom User-Agent for website requests |
 
 ## Output format
@@ -160,7 +144,6 @@ console.log(toPlainText(site));
 | `scrapeSite(url, options?)`, `toPlainText(result)` | `src/scraper.ts` |
 | `renderSite(url)` (Chrome) | `src/render-fetch.ts` |
 | `scrapeLinkedInApi(companyUrl, personUrl, onProgress, onResult)` | `src/linkedin-api.ts` |
-| `scrapeLinkedIn(targets, onProgress, onResult)` (browser mode) | `src/linkedin.ts` |
 
 ## Project structure
 
@@ -170,8 +153,7 @@ src/
   scraper.ts       website scraper: page discovery and text extraction
   render-fetch.ts  Chrome fallback and private-network blocking
   linkedin-api.ts  LinkedIn through Bright Data / Apify
-  linkedin.ts      LinkedIn browser mode, URL cleanup, rate limit
-  login.ts         one-time LinkedIn sign-in for browser mode
+  linkedin.ts      LinkedIn URL cleanup and shared types
 test/              Vitest tests (no network needed)
 ```
 
@@ -181,7 +163,6 @@ test/              Vitest tests (no network needed)
 |---|---|
 | `Chromium distribution 'chrome' is not found` | Install Google Chrome |
 | `set BRIGHTDATA_TOKEN or APIFY_TOKEN` | Create `.env` and add a key (see [Configuration](#configuration)) |
-| `LinkedIn needs you to sign in again` | Run `npm run linkedin:login` |
 | `blocked host ...` or `blocked address for ...` | The URL points inside a private network; only public sites are allowed |
 | Very little text from a site | Add `--render` |
 
