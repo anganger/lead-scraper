@@ -1,4 +1,28 @@
+# dependencies
 node_modules/
+
+# secrets: never commit real keys
 .env
+.env.*
+!.env.example
+
+# scraper output and local browser data
 output/
+.lead-scraper/
+chrome-profile/
+
+# build, test and tool caches
+dist/
+coverage/
+*.tsbuildinfo
+.vitest/
+*.log
+npm-debug.log*
+
+# editors and OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
 .DS_Store
+Thumbs.db

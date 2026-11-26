@@ -1,8 +1,29 @@
 {
   "name": "lead-scraper",
+  "version": "0.1.0",
+  "description": "Research a company in one command: website and LinkedIn scraper with clean text output",
+  "license": "MIT",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anganger/lead-scraper.git"
+  },
+  "bugs": "https://github.com/anganger/lead-scraper/issues",
+  "homepage": "https://github.com/anganger/lead-scraper#readme",
+  "keywords": [
+    "scraper",
+    "web-scraping",
+    "linkedin",
+    "lead-generation",
+    "sales",
+    "company-research",
+    "playwright",
+    "typescript"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "site": "tsx --env-file-if-exists=.env src/cli.ts site",
     "linkedin": "tsx --env-file-if-exists=.env src/cli.ts linkedin",
@@ -10,6 +31,14 @@
     "test": "vitest run",
     "check": "tsc --noEmit"
   },
-  "dependencies": { "cheerio": "^1.2.0", "playwright-core": "^1.64.1" },
-  "devDependencies": { "@types/node": "^22", "tsx": "^4.23.15", "typescript": "^5", "vitest": "^3.2.7" }
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "playwright-core": "^1.64.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vitest": "^3.2.7"
+  }
 }

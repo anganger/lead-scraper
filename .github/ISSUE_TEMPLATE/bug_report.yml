@@ -1,0 +1,32 @@
+name: Bug report
+description: Something does not work as the README says
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: The command you ran and what you expected instead.
+      placeholder: npm run site -- https://example.com
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Terminal output
+      description: Paste the error. Remove any API keys or personal data first.
+      render: text
+  - type: input
+    id: env
+    attributes:
+      label: OS and Node version
+      placeholder: macOS 15, Node 22.11
+    validations:
+      required: true
+  - type: dropdown
+    id: part
+    attributes:
+      label: Which part?
+      options: [Website scraper, LinkedIn (API mode), LinkedIn (browser mode), Setup / install]
+    validations:
+      required: true
